@@ -1,9 +1,12 @@
-package com.rest.domain;
+package com.rest.rest_app.domain;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +20,7 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id")
     )
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
 
     public Set<Author> getAuthors() {
         return authors;
