@@ -22,6 +22,9 @@ public class Book {
     )
     private Set<Author> authors = new HashSet<>();
 
+    @ManyToOne
+    private Publisher publisher;
+
     public Publisher getPublisher() {
         return publisher;
     }
@@ -29,9 +32,6 @@ public class Book {
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
-
-    @ManyToOne
-    private Publisher publisher;
 
     public Set<Author> getAuthors() {
         return authors;

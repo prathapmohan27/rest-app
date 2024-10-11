@@ -25,25 +25,47 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Author author = new Author();
-        author.setFirstName("John");
-        author.setLastName("Smith");
+        Author author1 = new Author();
+        author1.setFirstName("John");
+        author1.setLastName("Smith");
 
-        Book book = new Book();
-        book.setTitle("The Book");
-        book.setIsbn("1234567890");
+        Author author2 = new Author();
+        author2.setFirstName("Roronova");
+        author2.setLastName("zoro");
+
+        Book book1 = new Book();
+        book1.setTitle("The Book");
+        book1.setIsbn("1234567890");
+
+        Book book2 = new Book();
+        book2.setTitle("The Anil");
+        book2.setIsbn("1234567890");
 
         Publisher publisher = new Publisher();
         publisher.setName("luffy");
         publisher.setCity("east blue");
 
-        Author authorSaved = authorRepository.save(author);
-        Book bookSaved =  bookRepository.save(book);
+        Author authorSaved1 = authorRepository.save(author1);
+        Author authorSaved2 = authorRepository.save(author2);
+
+        Book bookSaved1 =  bookRepository.save(book1);
+        Book bookSaved2 =  bookRepository.save(book2);
+
         Publisher publisherSaved =  publisherRepository.save(publisher);
 
-        authorSaved.getBooks().add(bookSaved);
-        authorRepository.save(authorSaved);
-        bookSaved.setPublisher(publisherSaved);
+        authorSaved1.getBooks().add(bookSaved1);
+        authorSaved2.getBooks().add(bookSaved2);
+
+        bookSaved1.getAuthors().add(authorSaved1);
+        bookSaved2.getAuthors().add(authorSaved2);
+
+        bookSaved1.setPublisher(publisherSaved);
+        bookSaved2.setPublisher(publisherSaved);
+
+        authorRepository.save(authorSaved1);
+        authorRepository.save(authorSaved2);
+        bookRepository.save(bookSaved1);
+        bookRepository.save(bookSaved2);
 
         System.out.println("Bootstrap:");
         System.out.println("Author Count " + authorRepository.count());
